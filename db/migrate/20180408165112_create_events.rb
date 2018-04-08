@@ -4,7 +4,7 @@ class CreateEvents < ActiveRecord::Migration[5.1]
       t.string :title
       t.string :content
       t.text :image
-      t.integer :yoggies_id
+      t.integer :user_id
 
       t.timestamps
     end

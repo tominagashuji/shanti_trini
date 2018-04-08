@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   resources :users
+  resources :events
   get 'sessions/index'
 
   root 'tops#index'
 
-  resources :events
 
   resources :events do
     collection do

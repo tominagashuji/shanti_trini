@@ -23,15 +23,14 @@
 
   <div class="field">
     <%= form.label :image %>
-    <%= form.file_field :image, id: :event_image %>
-    <%= form.hidden_field :image_cache %>
+    <%= form.text_area :image, id: :event_image %>
   </div>
 
-  <!-- <div class="field">
-    <%= form.label :yoggy_id %>
-    <%= form.number_field :yoggy_id, id: :event_yoggy_id %>
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.number_field :user_id, id: :event_user_id %>
   </div>
- -->
+
   <div class="actions">
     <%= form.submit %>
   </div>
