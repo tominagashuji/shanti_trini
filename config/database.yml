@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  template: template0
+
+development:
+  <<: *default
+  database: shanti_trini_development
+
+test:
+  <<: *default
+  database: shanti_trini_test
+
+production:
+  <<: *default
+  database: shanti_trini_production
+  username: shanti_trini
+  password: <%= ENV['SHANTI_TRINI_DATABASE_PASSWORD'] %>
