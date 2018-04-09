@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<p id="notice"></p>
 
 <p>
   <strong>Title:</strong>
@@ -10,15 +10,25 @@
   <%= @event.content %>
 </p>
 
-<p>
+<!-- <p>
   <strong>Image:</strong>
   <%= @event.image %>
-</p>
+</p> -->
 
 <p>
   <strong>User:</strong>
   <%= @event.user_id %>
 </p>
+
+<% if @favorite.present? %>
+  <button type="button" class="btn bun-danger">
+    <%= link_to 'ヨガイベント参加取消', favorite_path(event_id: @event.id), method: :delete %>
+  </button>
+<%else%>
+  <button type="button" class="btn btn-prymary">
+    <%= link_to 'ヨガイベントに参加する', favorites_path(event_id: @event.id),method: :post %>
+  </button>
+<%end%>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>
