@@ -20,5 +20,28 @@
   <%= @user.image %>
 </p> -->
 
+<h1><%= @user.name %>さんの参加予定ヨガイベント</h1>
+
+  <th>ヨガイベント</th><br>
+<table>
+  <thead>
+    <tr>
+      <th><%= "ヨガイベント名" %></th>
+      <th><%= "イベント内容" %></th>
+      <th><%= "画像イメージ" %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @favorite_events.each do |favorite_events|%>
+      <tr>
+        <td><%= favorite_events.title %></td>
+        <td><%= favorite_events.content %></td>
+        <td><%= favorite_events.image %></td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
