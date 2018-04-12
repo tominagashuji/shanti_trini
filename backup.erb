@@ -1,66 +1,7 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Shanti_Trini</title>
-    <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#gnavi">
-          <span class="sr-only">Shanti_Trini</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Shanti_Trini</a>
-
-        <div id="gnavi" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <button type="button" class="btn btn-info">
-              <li><%= link_to 'home', tops_path %></li>
-            </button>
-            <button type="button" class="btn btn-info">
-              <li><%= link_to 'ヨガイベントを作成する', new_event_path %></li>
-            </button>
-
-            <% if logged_in? %>
-              <button type="button" class="btn btn-info">
-                  <li><%= link_to "Profile", user_path(current_user.id) %></li>
-              </button>
-              <button type="button" class="btn btn-success">
-                  <li><%= link_to "Logout", session_path(current_user.id), method: :delete %></li>
-              </button>
-              <button type="button" class="btn btn-warning">
-                  <li><%= link_to "events", events_path(current_user.id) %></li>
-              </button>
-            <% else %>
-              <button type="button" class="btn btn-warning">
-                <%= link_to "Sign up", new_user_path %>
-              </button>
-              <button type="button" class="btn btn-warning">
-                <%= link_to "Login", new_session_path %>
-              </button>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-  </nav>
-
-  <body>
-    <% flash.each do |key, value| %>
-      <%= content_tag(:div, value, class: "#{key}") %>
-    <% end %>
-    <%= yield %>
-  </body>
-
-  <footer class="footer">
-    <p>Copyright © 2016 DIVE INC All RIGHTS RESERVED.</p>
-  </footer>
-</html>
+class EventMailer < ApplicationMailer
+  def event_mail(event)
+   @event = event
+   @event_email = @event.user.email
+   mail to: @event_email, subject: "お問い合わせの確認メール"
+  end
+end
