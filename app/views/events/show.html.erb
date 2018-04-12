@@ -10,14 +10,9 @@
   <%= @event.content %>
 </p>
 
-<!-- <p>
-  <strong>Image:</strong>
-  <%= @event.image %>
-</p> -->
-
 <p>
-  <strong>User:</strong>
-  <%= @event.user_id %>
+  <strong>Image:</strong>
+  <%= image_tag @event.image %>
 </p>
 
 <% if @favorite.present? %>

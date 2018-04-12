@@ -34,11 +34,11 @@
           <%= form.password_field :password_confirmation %>
         </div>
 
-        <!-- <div class="field">
-          <%#= form.label :image %>
-          <%#= form.file_field :image, id: :user_image %>
-          <%#= form.hidden_field :image_chase %>
-        </div> -->
+        <div class="field">
+          <%= form.label :image %>
+          <%= form.file_field :image, id: :user_image %>
+          <%= form.hidden_field :image_cache %>
+        </div>
 
         <div class="actions">
           <%= form.submit %>

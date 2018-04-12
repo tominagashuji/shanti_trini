@@ -11,15 +11,27 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event = Event.new
+    if params[:back]
+      @event = Event.new(event_params)
+    else
+      @event = Event.new
+    end
   end
 
   def edit
   end
 
+  def confirm
+    @event = Event.new(event_params)
+    @event.user_id = current_user.id
+    render :new if @event.invalid?
+  end
+
   def create
     @event = Event.new(event_params)
     @event.user_id = current_user.id
+    @event.image.retrieve_from_cache! params[:cache][:image]
+    @event.save!
 
     respond_to do |format|
       if @event.save
@@ -59,7 +71,7 @@ class EventsController < ApplicationController
     end
 
     def event_params
-      params.require(:event).permit(:title, :content, :image, :user_id)
+      params.require(:event).permit(:title, :content, :image, :user_id, :image_cache)
     end
 
     def set_login

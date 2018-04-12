@@ -18,7 +18,7 @@
       <tr>
         <td><%= event.title %></td>
         <td><%= event.content %></td>
-        <td><%= event.image %></td>
+        <td><%= image_tag event.image %></td>
         <td><%#= favorites_users.name %></td>
         <td><%= link_to 'Show', event %></td>
         <% if current_user.id == event.user_id %>

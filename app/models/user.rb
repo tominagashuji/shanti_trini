@@ -2,6 +2,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :email, presence: true
+  validates :image, presence: true
 
   validates :name, presence: true, length: { maximum: 30 }
   validates :email, presence: true, length: { maximum: 255 },
@@ -18,5 +19,7 @@ class User < ApplicationRecord
 
   has_many :favorites, dependent: :destroy
   has_many :favorites_events, through: :favorites, source: :event
+
+  mount_uploader :image, ImageUploader
 
 end
