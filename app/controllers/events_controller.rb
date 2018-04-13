@@ -4,6 +4,13 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
+    @q = Event.search(params[:q])
+    @people = @q.result(distinct: true)
+    if params[:q].nil?
+      @lists = @events
+    else
+      @lists = @people
+    end
   end
 
   def show
