@@ -63,3 +63,8 @@ gem 'bcrypt', '3.1.11'
 gem 'pry-rails'
 
 gem 'ransack'
+gem 'kaminari'
+
+gem "therubyracer"
+gem "less-rails"
+gem "twitter-bootstrap-rails"
