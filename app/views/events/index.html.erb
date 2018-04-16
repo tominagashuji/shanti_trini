@@ -11,10 +11,13 @@
 
 <% @lists.each do |list| %>
   <div class="panel panel-success">
-    <div class="panel-footer">イベント名：<%= link_to(list.title,"/lists/#{list.id}") %></div>
+    <div class="panel-footer">イベント名：<%= list.title %></div>
     <div class="panel-body">イベント内容：<%= list.content %></div>
-    <div class="panel-footer">イメージ画像：<%= image_tag list.image %></div>
+    <div class="panel-footer">イメージ画像：<%= image_tag list.image.url(:thumb) %></div>
     <div class="panel-body">開催者：<%= list.user.name %></div>
+    <%= link_to '詳細', event_path(list) %>
+    <%= link_to '編集', edit_event_path(list), data: { confirm: '本当に編集します？' } %>
+    <%= link_to '削除', event_path(list), method: :delete,data: { confirm: '本当に削除します？' } %>
   </div>
 <% end %>
 
