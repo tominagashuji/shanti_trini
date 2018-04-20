@@ -14,7 +14,6 @@ class EventsController < ApplicationController
       @lists = @result
     end
     @lists = @lists.page(params[:page]).per(3)
-
   end
 
   def show

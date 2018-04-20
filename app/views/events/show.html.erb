@@ -15,15 +15,24 @@
   <%= image_tag @event.image %>
 </p>
 
-<% if @favorite.present? %>
-  <button type="button" class="btn bun-danger">
-    <%= link_to 'ヨガイベント参加取消', favorite_path(event_id: @event.id), method: :delete %>
-  </button>
-<%else%>
-  <button type="button" class="btn btn-prymary">
-    <%= link_to 'ヨガイベントに参加する', favorites_path(event_id: @event.id),method: :post %>
-  </button>
-<%end%>
 
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<div class="btn-group" role="group" aria-label="...">
+  <% if @favorite.present? %>
+    <button type="button" class="btn btn-danger">
+      <%= link_to 'ヨガイベント参加取消', favorite_path(event_id: @event.id), method: :delete %>
+    </button>
+  <%else%>
+    <button type="button" class="btn btn-prymary">
+      <%= link_to 'ヨガイベントに参加する', favorites_path(event_id: @event.id),method: :post %>
+    </button>
+  <%end%>
+
+  <% if current_user.id == @event.user_id %>
+    <button type="button" class="btn btn-warning">
+      <%= link_to 'イベント編集', edit_event_path(@event), data: { confirm: '本当に編集します？' } %>
+    </button>
+    <button type="button" class="btn btn-danger">
+      <%= link_to 'イベント削除', event_path(@event), method: :delete,data: { confirm: '本当に削除します？' } %>
+    </button>
+  <% end %>
+</div>
