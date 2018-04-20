@@ -15,16 +15,17 @@
   <%= image_tag @event.image %>
 </p>
 
-
 <div class="btn-group" role="group" aria-label="...">
-  <% if @favorite.present? %>
-    <button type="button" class="btn btn-danger">
-      <%= link_to 'ヨガイベント参加取消', favorite_path(event_id: @event.id), method: :delete %>
-    </button>
-  <%else%>
-    <button type="button" class="btn btn-prymary">
-      <%= link_to 'ヨガイベントに参加する', favorites_path(event_id: @event.id),method: :post %>
-    </button>
+  <% if current_user.id != @event.user_id %>
+    <% if @favorite.present? %>
+      <button type="button" class="btn btn-danger">
+        <%= link_to 'ヨガイベント参加取消', favorite_path(event_id: @event.id), method: :delete %>
+      </button>
+    <%else%>
+      <button type="button" class="btn btn-prymary">
+        <%= link_to 'ヨガイベントに参加する', favorites_path(event_id: @event.id),method: :post %>
+      </button>
+    <%end%>
   <%end%>
 
   <% if current_user.id == @event.user_id %>
