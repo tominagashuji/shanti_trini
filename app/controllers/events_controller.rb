@@ -8,11 +8,16 @@ class EventsController < ApplicationController
     @q = Event.search(params[:q])
     @result = @q.result(distinct: true)
 
-    if params[:q].nil?
-      @lists = @events
-    else
-      @lists = @result
-    end
+    params[:q] == nil? ? @lists = @events : @lists = @result
+
+    # controller.action_name == 'show' ? "コメントを投稿する" : "コメントを更新する"
+
+    # if params[:q].nil?
+    #   @lists = @events
+    # else
+    #   @lists = @result
+    # end
+
     @lists = @lists.page(params[:page]).per(3)
   end
 
@@ -38,6 +43,7 @@ class EventsController < ApplicationController
   end
 
   def create
+    binding.pry
     @event = Event.new(event_params)
     @event.user_id = current_user.id
     @event.image.retrieve_from_cache! params[:cache][:image]

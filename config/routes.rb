@@ -1,15 +1,12 @@
 Rails.application.routes.draw do
-  resources :users
-  resources :events
-
   root 'tops#index'
 
+  resources :users
   resources :events do
     collection do
       post :confirm
     end
   end
-
   resources :tops
   resources :sessions
   resources :favorites, only: [:create, :destroy]
