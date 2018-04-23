@@ -19,36 +19,24 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'ユーザー情報の登録が完了しました！' }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.save
+      redirect_to @user, notice: 'ユーザー情報の登録が完了しました！'
+    else
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'ユーザー情報を更新しました！' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.update(user_params)
+      redirect_to @user, notice: 'ユーザー情報を更新しました！'
+    else
+      render :edit
     end
   end
 
   def destroy
     @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: 'ユーザー情報を削除しました！' }
-      format.json { head :no_content }
-    end
+    format.html { redirect_to users_url, notice: 'ユーザー情報を削除しました！' }
   end
 
   private
@@ -57,8 +45,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation,
-                                   :image, :image_cache)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :image, :image_cache)
     end
 end

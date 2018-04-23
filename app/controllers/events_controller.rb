@@ -9,15 +9,6 @@ class EventsController < ApplicationController
     @result = @q.result(distinct: true)
 
     params[:q] == nil? ? @lists = @events : @lists = @result
-
-    # controller.action_name == 'show' ? "コメントを投稿する" : "コメントを更新する"
-
-    # if params[:q].nil?
-    #   @lists = @events
-    # else
-    #   @lists = @result
-    # end
-
     @lists = @lists.page(params[:page]).per(3)
   end
 
@@ -26,11 +17,7 @@ class EventsController < ApplicationController
   end
 
   def new
-    if params[:back]
-      @event = Event.new(event_params)
-    else
-      @event = Event.new
-    end
+    params[:back] == nil ? @event = Event.new : @event = Event.new(event_params)
   end
 
   def edit
@@ -43,42 +30,29 @@ class EventsController < ApplicationController
   end
 
   def create
-    binding.pry
     @event = Event.new(event_params)
     @event.user_id = current_user.id
     @event.image.retrieve_from_cache! params[:cache][:image]
-    @event.save!
 
-    respond_to do |format|
-      if @event.save
-        EventMailer.event_mail(@event).deliver
-        format.html { redirect_to events_path, notice: 'イベント作成に成功しました！' }
-        format.json { render :show, status: :created, location: @event }
-      else
-        format.html { render :new }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
+    if @event.save
+      EventMailer.event_mail(@event).deliver
+      redirect_to events_path, notice: 'イベント作成に成功しました！'
+    else
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @event.update(event_params)
-        format.html { redirect_to @event, notice: 'イベント更新に成功しました！' }
-        format.json { render :show, status: :ok, location: @event }
-      else
-        format.html { render :edit }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
+    if @event.update(event_params)
+      redirect_to @event, notice: 'イベント更新に成功しました！'
+    else
+      render :edit
     end
   end
 
   def destroy
     @event.destroy
-    respond_to do |format|
-      format.html { redirect_to events_url, notice: 'イベントを削除しました。' }
-      format.json { head :no_content }
-    end
+    redirect_to events_url, notice: 'イベントを削除しました。'
   end
 
   private
