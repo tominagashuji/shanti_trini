@@ -15,5 +15,4 @@ class User < ApplicationRecord
   before_save {email.downcase!}
 
   mount_uploader :image, ImageUploader
-
 end
