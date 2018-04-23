@@ -56,18 +56,18 @@ class EventsController < ApplicationController
   end
 
   private
-    def set_event
-      @event = Event.find(params[:id])
-    end
+  def set_event
+    @event = Event.find(params[:id])
+  end
 
-    def event_params
-      params.require(:event).permit(:title, :content, :image, :user_id, :image_cache)
-    end
+  def event_params
+    params.require(:event).permit(:title, :content, :image, :user_id, :image_cache)
+  end
 
-    def set_login
-      if current_user.nil?
-        redirect_to tops_path, notice:"ログインしてください。"
-      end
+  def set_login
+    if current_user.nil?
+      redirect_to tops_path, notice:"ログインしてください。"
     end
+  end
 
 end
