@@ -3,13 +3,13 @@ class EventsController < ApplicationController
   before_action :set_login, only: [:new, :edit, :show]
 
   def index
-    @events = Event.all
+    # @events = Event.all
 
     @q = Event.search(params[:q])
     @result = @q.result(distinct: true)
 
-    params[:q] == nil? ? @lists = @events : @lists = @result
-    @lists = @lists.page(params[:page]).per(3)
+    params[:q] == nil? ? @events = Event.all : @events = @result
+    @events = @events.page(params[:page]).per(3)
   end
 
   def show
