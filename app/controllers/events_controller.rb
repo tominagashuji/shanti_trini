@@ -1,10 +1,8 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-  before_action :set_login, only: [:new, :edit, :show]
+  before_action :login_check, only: [:edit, :show]
 
   def index
-    # @events = Event.all
-
     @q = Event.search(params[:q])
     @result = @q.result(distinct: true)
 
@@ -63,7 +61,7 @@ class EventsController < ApplicationController
     params.require(:event).permit(:title, :content, :image, :user_id, :image_cache)
   end
 
-  def set_login
+  def login_check
     if current_user.nil?
       redirect_to tops_path, notice:"ログインしてください。"
     end

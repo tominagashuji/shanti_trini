@@ -32,6 +32,9 @@ gem 'bcrypt', '3.1.11'
 #デバッグ
 gem 'pry-rails'
 
+#seedデータ作成
+gem 'faker'
+
 #アプリ
 gem 'ransack'
 gem 'kaminari'
