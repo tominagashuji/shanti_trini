@@ -62,10 +62,11 @@ class EventsController < ApplicationController
   end
 
   def login_check
+    @user = User.find(params[:id])
     if current_user.nil?
       redirect_to tops_path, notice:"ログインしてください。"
-    elsif current_user.id == @users.id
-      redirect_to tops_path, notice:"ログインしてください。"
+    elsif current_user.id != @users.id
+      redirect_to tops_path, notice:"別アカウントのアクセスはできません。"
     end
   end
 end
