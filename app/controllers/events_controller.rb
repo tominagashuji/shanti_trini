@@ -64,7 +64,8 @@ class EventsController < ApplicationController
   def login_check
     if current_user.nil?
       redirect_to tops_path, notice:"ログインしてください。"
+    elsif current_user.id == @users.id
+      redirect_to tops_path, notice:"ログインしてください。"
     end
   end
-
 end
