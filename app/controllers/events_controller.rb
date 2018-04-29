@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-  before_action :login_check, only: [:edit, :show]
+  before_action :login_check, only: [:new, :show, :edit]
 
   def index
     @q = Event.search(params[:q])
@@ -62,11 +62,8 @@ class EventsController < ApplicationController
   end
 
   def login_check
-    @user = User.find(params[:id])
     if current_user.nil?
       redirect_to tops_path, notice:"ログインしてください。"
-    elsif current_user.id != @users.id
-      redirect_to tops_path, notice:"別アカウントのアクセスはできません。"
     end
   end
 end

@@ -10,6 +10,12 @@
   <%= @event.content %>
 </p>
 
+<% @event.favorites_users.each do |user| %>
+  <div class="panel panel-success">
+    <div class="panel-heading">参加者名：<%= user.name %></div>
+  </div>
+<% end %>
+
 <p>
   <strong>Image:</strong>
   <%= image_tag @event.image %>
