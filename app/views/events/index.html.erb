@@ -10,22 +10,24 @@
 <% end %>
 <%= sort_link(@q, :title, 'Last Name',default_order: :desc) %>
 
-<% @events.each do |event| %>
-  <div class="panel panel-danger">
-    <div class="panel-heading">開催者：<%= event.user.name %></div>
-    <div class="panel-heading">イベント名：<%= event.title %></div>
-    <div class="panel-body">イベント内容：<%= event.content %></div>
-    <div class="panel-footer">イメージ画像：<%= image_tag event.image.url(:thumb) %></div>
+<div class="container row">
+  <% @events.each do |event| %>
+      <div class="panel panel-danger col-xs-12 col-sm-6 col-md-4">
+        <div class="panel-heading">開催者：<%= event.user.name %></div>
+        <div class="panel-heading">イベント名：<%= event.title %></div>
+        <div class="panel-body">イベント内容：<%= event.content %></div>
+        <div class="panel-footer">イメージ画像：<%= image_tag event.image.url(:thumb) %></div>
 
-    <div class="btn-group" role="group" aria-label="...">
-      <button type="button" class="btn label-success"><%= link_to 'イベント詳細', event_path(event) %></button>
-      <% if current_user.id == event.user_id %>
-        <button type="button" class="btn btn-warning"><%= link_to '編集', edit_event_path(event), data: { confirm: '本当に編集します？' } %></button>
-        <button type="button" class="btn btn-danger"><%= link_to '削除', event_path(event), method: :delete,data: { confirm: '本当に削除します？' } %></button>
-      <% end %>
+        <div class="btn-group" role="group" aria-label="...">
+          <button type="button" class="btn label-success"><%= link_to 'イベント詳細', event_path(event) %></button>
+          <% if current_user.id == event.user_id %>
+            <button type="button" class="btn btn-warning"><%= link_to '編集', edit_event_path(event), data: { confirm: '本当に編集します？' } %></button>
+            <button type="button" class="btn btn-danger"><%= link_to '削除', event_path(event), method: :delete,data: { confirm: '本当に削除します？' } %></button>
+          <% end %>
+        </div>
+
     </div>
-
-  </div>
-<% end %>
+  <% end %>
+</div>
 
 <%= paginate @events %>
