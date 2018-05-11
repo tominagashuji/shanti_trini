@@ -7,7 +7,7 @@ class EventsController < ApplicationController
     @result = @q.result(distinct: true)
 
     params[:q] == nil? ? @events = Event.all : @events = @result
-    @events = @events.page(params[:page]).per(3)
+    @events = @events.page(params[:page]).per(6)
   end
 
   def show
