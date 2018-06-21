@@ -1,6 +1,5 @@
 class FavoritesController < ApplicationController
   def create
-    binding.pry
     favorite = current_user.favorites.create(event_id: params[:event_id])
     redirect_to events_url, notice: "#{favorite.event.user.name}さんのヨガイベントに参加予約しました！"
   end
