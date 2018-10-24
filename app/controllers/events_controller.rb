@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :login_check, only: [:new, :show, :edit]
+  before_action :user_check, only: [:edit]
 
   def index
     @q = Event.search(params[:q])
@@ -64,6 +65,14 @@ class EventsController < ApplicationController
   def login_check
     if current_user.nil?
       redirect_to tops_path, notice:"ログインしてください。"
+    end
+  end
+
+  def user_check
+    binding.pry
+    @event = Event.find(params[:id])
+    if @event.user_id != current_user.id
+      redirect_to events_path, notice:"他人の投稿は編集出来ません。"
     end
   end
 end
