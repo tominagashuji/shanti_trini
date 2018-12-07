@@ -29,16 +29,26 @@
   	/* 背景画像が読み込まれる前に表示される背景のカラー */
   	background-color: #FFFFFF;
   	/* 全画面表示させる */
-  	height: 1000px;
+  	height: 800px;
    /* 全画面表示させる */
   	color: pink;
   }
 
 .footer {
-    position: fixed;
-    bottom: 0;
-    padding-top: 1px;
-    text-align: right;
+    /*position: relative;
+    bottom: 0;*/
+    text-align: center;
+    color: pink;
+    background-color: green;
+    height: 50px;
+
+  	display: flex;
+  	align-items: center;
+      
+    /*以下は効かなかった*/
+    /*display: table-cell;
+    vertical-align: middle;
+    line-height: 180px;*/
   }
 
 .panel.panel-success{
