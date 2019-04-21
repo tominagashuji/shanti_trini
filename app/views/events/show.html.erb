@@ -43,3 +43,14 @@
     </button>
   <% end %>
 </div>
+
+<div id="comments_area">
+  <!-- 投稿されたコメント一覧をブログの詳細ページに表示するためのrender -->
+  <%= render partial: 'comments/index', locals: { comments: @comments, event: @event } %>
+</div>
+
+<!-- コメント入力欄をブログの詳細ページに表示するためのrender -->
+<%= render partial: 'comments/form', locals: { comment: @comment, event: @event } %>
+
+<%= link_to '編集', edit_event_path(@event) %> |
+<%= link_to '戻る', events_path %>

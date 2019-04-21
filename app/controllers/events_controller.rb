@@ -13,6 +13,8 @@ class EventsController < ApplicationController
 
   def show
     @favorite = current_user.favorites.find_by(event_id: @event.id)
+    @comments = @event.comments
+    @comment = @event.comments.build
   end
 
   def new
@@ -25,6 +27,7 @@ class EventsController < ApplicationController
   def confirm
     @event = Event.new(event_params)
     @event.user_id = current_user.id
+
     render :new if @event.invalid?
   end
 
@@ -69,7 +72,6 @@ class EventsController < ApplicationController
   end
 
   def user_check
-    binding.pry
     @event = Event.find(params[:id])
     if @event.user_id != current_user.id
       redirect_to events_path, notice:"他人の投稿は編集出来ません。"
