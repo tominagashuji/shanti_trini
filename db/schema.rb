@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180408165329) do
+ActiveRecord::Schema.define(version: 20190420173017) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.bigint "event_id"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_comments_on_event_id"
+  end
 
   create_table "events", force: :cascade do |t|
     t.string "title"
@@ -43,5 +51,6 @@ ActiveRecord::Schema.define(version: 20180408165329) do
     t.index ["event_id"], name: "index_users_on_event_id"
   end
 
+  add_foreign_key "comments", "events"
   add_foreign_key "users", "events"
 end

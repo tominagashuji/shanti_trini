@@ -42,6 +42,11 @@ gem 'kaminari'
 #other
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+#デバッグ
+gem 'pry-rails'
+gem 'better_errors'
+gem 'binding_of_caller'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara', '~> 2.13'
